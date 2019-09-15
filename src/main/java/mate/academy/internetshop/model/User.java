@@ -8,13 +8,11 @@ public class User {
     private static long idGenerator = 0;
     private Long id;
     private List<Order> orders;
-    private Bucket bucket;
 
     public User(String name) {
         this.name = name;
         id = idGenerator++;
         orders = new ArrayList<>();
-        this.bucket = new Bucket(this);
     }
 
     public static String getName() {
@@ -35,13 +33,5 @@ public class User {
 
     public void setOrders(List<Order> orders) {
         this.orders = orders;
-    }
-
-    public Bucket getBucket() {
-        return bucket;
-    }
-
-    public void setBucket(Bucket bucket) {
-        this.bucket = bucket;
     }
 }

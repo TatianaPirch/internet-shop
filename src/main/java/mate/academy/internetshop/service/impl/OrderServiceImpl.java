@@ -1,6 +1,8 @@
   
 package mate.academy.internetshop.service.impl;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -42,17 +44,18 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public Order completeOrder(List<Item> items, User user) {
-        Order order = new Order(items, user);
+    public Order completeOrder(List<Item> items, Long userId) {
+        Order order = new Order(items, userId);
         orderDao.add(order);
-        userDao.get(user.getId()).getOrders().add(order);
+        userDao.get(userId).getOrders().add(order);
         return order;
     }
 
     @Override
     public List<Order> getAllOrdersForUser(Long userId) {
         return Storage.orders.stream()
-                .filter(o -> o.getUser().getId().equals(userId))
+                .filter(o -> o.getUserId().equals(userId))
                 .collect(Collectors.toList());
+
     }
 }

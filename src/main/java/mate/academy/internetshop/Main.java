@@ -4,11 +4,14 @@ import mate.academy.internetshop.annotation.Inject;
 import mate.academy.internetshop.annotation.Injector;
 import mate.academy.internetshop.model.Bucket;
 import mate.academy.internetshop.model.Item;
+import mate.academy.internetshop.model.Order;
 import mate.academy.internetshop.model.User;
 import mate.academy.internetshop.service.BucketService;
 import mate.academy.internetshop.service.ItemService;
 import mate.academy.internetshop.service.OrderService;
 import mate.academy.internetshop.service.UserService;
+
+import java.util.List;
 
 public class Main {
     static {
@@ -32,7 +35,8 @@ public class Main {
 
         User tania = userService.create(new User("Tania"));
 
-        Bucket taniaBucket = bucketService.get(tania.getBucket().getId());
+        Bucket taniaBucket = new Bucket(tania.getId());
+        bucketService.create(taniaBucket);
 
         Item pen = itemService.create(new Item("Pen", 10.));
         Item notebook = itemService.create(new Item("Notebook", 50.));
@@ -42,8 +46,11 @@ public class Main {
         bucketService.addItem(taniaBucket.getId(), notebook.getId());
         bucketService.addItem(taniaBucket.getId(), folder.getId());
 
-        orderService.completeOrder(taniaBucket.getItems(), taniaBucket.getUser());
+        orderService.completeOrder(taniaBucket.getItems(), tania.getId());
 
-        userService.getOrders(tania).forEach(System.out::println);
+        bucketService.clear(taniaBucket.getId());
+
+        List<Order> allOrdersForUser = orderService.getAllOrdersForUser(tania.getId());
+        allOrdersForUser.forEach(System.out::println);
     }
 }

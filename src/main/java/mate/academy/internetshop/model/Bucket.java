@@ -7,12 +7,12 @@ public class Bucket {
     private static long idGenerator = 0;
     private Long id;
     private List<Item> items;
-    private User user;
+    private final Long userId;
 
-    public Bucket(User user) {
+    public Bucket(Long userId) {
+        this.userId = userId;
         id = idGenerator++;
         items = new ArrayList<>();
-        this.user = user;
     }
 
     public Long getId() {
@@ -27,11 +27,11 @@ public class Bucket {
         this.items = items;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public Long getUserId() {
+        return userId;
     }
 
-    public User getUser() {
-        return user;
+    public void clear() {
+        items = new ArrayList<>();
     }
 }

@@ -18,9 +18,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User create(User user) {
-        User newUser = userDao.add(user);
-        bucketDao.add(newUser.getBucket());
-        return newUser;
+        return userDao.add(user);
     }
 
     @Override
@@ -39,7 +37,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List getOrders(User user) {
-        return userDao.get(user.getId()).getOrders();
+    public List getOrders(Long id) {
+        return userDao.get(id).getOrders();
     }
 }

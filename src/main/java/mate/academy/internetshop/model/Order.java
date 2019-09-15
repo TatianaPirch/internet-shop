@@ -6,12 +6,12 @@ public class Order {
     private static long idGenerator = 0;
     private Long id;
     private List<Item> items;
-    private User user;
+    private Long userId;
 
-    public Order(List<Item> items, User user) {
+    public Order(List<Item> items, Long userId) {
         id = idGenerator++;
         this.items = items;
-        this.user = user;
+        this.userId = userId;
     }
 
     public Long getId() {
@@ -26,17 +26,13 @@ public class Order {
         this.items = items;
     }
 
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
+    public Long getUserId() {
+        return userId;
     }
 
     @Override
     public String toString() {
-        return "Order id = " + id + ", user id = " + user.getId() + "\n" + items;
+        return "Order id = " + id + ", user id = " + userId + "\n" + items;
     }
 }
 
