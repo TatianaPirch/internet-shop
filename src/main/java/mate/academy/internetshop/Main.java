@@ -43,5 +43,7 @@ public class Main {
         bucketService.addItem(taniaBucket.getId(), folder.getId());
 
         orderService.completeOrder(taniaBucket.getItems(), taniaBucket.getUser());
+
+        userService.getOrders(tania).forEach(System.out::println);
     }
 }
