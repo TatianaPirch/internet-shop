@@ -4,10 +4,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class User {
-    private static String name;
+    private String name;
     private static long idGenerator = 0;
     private Long id;
     private List<Order> orders;
+    private String surname;
+    private String login;
+    private String password;
 
     public User(String name) {
         this.name = name;
@@ -15,12 +18,20 @@ public class User {
         orders = new ArrayList<>();
     }
 
-    public static String getName() {
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", name=" + name +
+                '}';
+    }
+
+    public String getName() {
         return name;
     }
 
-    public static void setName(String name) {
-        User.name = name;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public Long getId() {
