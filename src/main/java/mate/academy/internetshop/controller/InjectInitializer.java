@@ -15,11 +15,9 @@ public class InjectInitializer implements ServletContextListener {
         } catch (IllegalAccessException e) {
             throw new RuntimeException(e);
         }
-
     }
 
     @Override
     public void contextDestroyed(ServletContextEvent servletContextEvent) {
-
     }
 }

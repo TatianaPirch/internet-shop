@@ -12,10 +12,14 @@ public class User {
     private String login;
     private String password;
 
-    public User(String name) {
-        this.name = name;
+    public User() {
         id = idGenerator++;
         orders = new ArrayList<>();
+    }
+
+    public User(String name) {
+        this();
+        this.name = name;
     }
 
     @Override
@@ -24,6 +28,34 @@ public class User {
                 "id=" + id +
                 ", name=" + name +
                 '}';
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getSurname() {
+        return surname;
+    }
+
+    public void setSurname(String surname) {
+        this.surname = surname;
+    }
+
+    public String getLogin() {
+        return login;
+    }
+
+    public void setLogin(String login) {
+        this.login = login;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public String getName() {
