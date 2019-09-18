@@ -13,9 +13,4 @@ public class Storage {
     public static final List<Bucket> buckets = new ArrayList<>();
     public static final List<Item> items = new ArrayList<>();
     public static final List<Order> orders = new ArrayList<>();
-    static {
-        items.add(new Item("Pen", 10.));
-        items.add(new Item("Notebook", 50.));
-        items.add(new Item("Folder", 100.));
-    }
 }

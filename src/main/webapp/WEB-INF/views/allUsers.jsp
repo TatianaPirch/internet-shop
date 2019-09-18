@@ -33,10 +33,10 @@ Hello, ${greeting}! Welcome to the all users page!
                 <c:out value="${user.login}" />
             </td>
             <td>
-            <a href="/internet_shop_war_exploded/servlet/deleteUser?user_id=${user.id}">DELETE</a>
+                <a href="/internet_shop_war_exploded/servlet/deleteUser?user_id=${user.id}">DELETE</a>
             </td>
             <td>
-                <a href="/internet_shop_war_exploded/servlet/getAllItems?">START SHOPPING</a>
+                <a href="/internet_shop_war_exploded/servlet/getAllItems">START SHOPPING</a>
             </td>
         </tr>
     </c:forEach>

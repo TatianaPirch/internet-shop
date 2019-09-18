@@ -17,17 +17,19 @@ public class User {
         orders = new ArrayList<>();
     }
 
-    public User(String name) {
+    public User(String name, String surname, String login) {
         this();
         this.name = name;
+        this.surname = surname;
+        this.login = login;
     }
 
     @Override
     public String toString() {
-        return "User{" +
-                "id=" + id +
-                ", name=" + name +
-                '}';
+        return "User{"
+                + "id=" + id
+                + ", name=" + name
+                + '}';
     }
 
     public void setId(Long id) {

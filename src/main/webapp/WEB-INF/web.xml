@@ -101,6 +101,15 @@
         <servlet-name>getAllOrders</servlet-name>
         <url-pattern>/servlet/getAllOrders</url-pattern>
     </servlet-mapping>
+
+    <servlet>
+        <servlet-name>createData</servlet-name>
+        <servlet-class>mate.academy.internetshop.controller.CreateDataController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>createData</servlet-name>
+        <url-pattern>/servlet/createData</url-pattern>
+    </servlet-mapping>
     <listener>
         <listener-class>mate.academy.internetshop.controller.InjectInitializer</listener-class>
     </listener>

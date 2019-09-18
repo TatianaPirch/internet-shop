@@ -2,12 +2,10 @@
 package mate.academy.internetshop.service.impl;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 import mate.academy.internetshop.annotation.Inject;
 import mate.academy.internetshop.dao.OrderDao;
 import mate.academy.internetshop.dao.UserDao;
-import mate.academy.internetshop.db.Storage;
 import mate.academy.internetshop.lib.Service;
 import mate.academy.internetshop.model.Item;
 import mate.academy.internetshop.model.Order;
@@ -50,9 +48,6 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public List<Order> getAllOrdersForUser(Long userId) {
-        return Storage.orders.stream()
-                .filter(o -> o.getUserId().equals(userId))
-                .collect(Collectors.toList());
-
+        return orderDao.getAllOrdersForUser(userId);
     }
 }

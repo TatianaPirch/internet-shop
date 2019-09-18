@@ -41,7 +41,7 @@
     </dependencies>
     <build>
         <plugins>
-            <!--<plugin>
+            <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-checkstyle-plugin</artifactId>
                 <version>3.1.0</version>
@@ -60,7 +60,7 @@
                     <failsOnError>true</failsOnError>
                     <linkXRef>false</linkXRef>
                 </configuration>
-            </plugin>-->
+            </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-war-plugin</artifactId>

@@ -28,6 +28,11 @@ public class BucketServiceImpl implements BucketService {
     }
 
     @Override
+    public Bucket getBucket(Long userId) {
+        return bucketDao.getBucket(userId);
+    }
+
+    @Override
     public Bucket update(Bucket bucket) {
         return bucketDao.update(bucket);
     }

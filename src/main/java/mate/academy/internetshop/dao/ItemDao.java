@@ -1,5 +1,7 @@
 package mate.academy.internetshop.dao;
 
+import java.util.List;
+
 import mate.academy.internetshop.model.Item;
 
 public interface ItemDao {
@@ -13,4 +15,6 @@ public interface ItemDao {
     void delete(Long id);
 
     void delete(Item item);
+
+    List<Item> getAllItems();
 }
