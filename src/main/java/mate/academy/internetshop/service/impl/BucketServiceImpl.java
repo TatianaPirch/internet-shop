@@ -28,6 +28,11 @@ public class BucketServiceImpl implements BucketService {
     }
 
     @Override
+    public Bucket getBucket(Long userId) {
+        return bucketDao.getBucket(userId);
+    }
+
+    @Override
     public Bucket update(Bucket bucket) {
         return bucketDao.update(bucket);
     }
@@ -42,6 +47,14 @@ public class BucketServiceImpl implements BucketService {
         Bucket bucket = bucketDao.get(bucketId);
         Item item = itemDao.get(itemId);
         bucket.getItems().add(item);
+        return bucketDao.update(bucket);
+    }
+
+    @Override
+    public Bucket deleteItem(Long bucketId, Long itemId) {
+        Bucket bucket = bucketDao.get(bucketId);
+        Item item = itemDao.get(itemId);
+        bucket.getItems().remove(item);
         return bucketDao.update(bucket);
     }
 

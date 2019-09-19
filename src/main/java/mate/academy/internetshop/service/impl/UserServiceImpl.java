@@ -40,4 +40,9 @@ public class UserServiceImpl implements UserService {
     public List getOrders(Long id) {
         return userDao.get(id).getOrders();
     }
+
+    @Override
+    public List<User> getAll() {
+        return userDao.getAll();
+    }
 }

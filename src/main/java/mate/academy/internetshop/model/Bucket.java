@@ -7,12 +7,17 @@ public class Bucket {
     private static long idGenerator = 0;
     private Long id;
     private List<Item> items;
-    private final Long userId;
+    private Long userId;
 
-    public Bucket(Long userId) {
-        this.userId = userId;
+    public Bucket() {
         id = idGenerator++;
         items = new ArrayList<>();
+    }
+
+    public Bucket(Long userId) {
+        this();
+        this.userId = userId;
+
     }
 
     public Long getId() {

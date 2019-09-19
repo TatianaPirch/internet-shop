@@ -26,6 +26,15 @@ public class BucketDaoImpl implements BucketDao {
     }
 
     @Override
+    public Bucket getBucket(Long userId) {
+        return Storage.buckets.stream()
+                .filter(b -> b.getUserId().equals(userId))
+                .findFirst()
+                .orElseThrow(() ->
+                        new NoSuchElementException("Can't find bucket with userId " + userId));
+    }
+
+    @Override
     public Bucket update(Bucket bucket) {
         Bucket updatedBucket = get(bucket.getId());
         updatedBucket.setItems(bucket.getItems());
