@@ -10,16 +10,18 @@ import java.util.List;
 
 import mate.academy.internetshop.lib.Dao;
 import mate.academy.internetshop.lib.Service;
+import org.apache.log4j.Logger;
 
 public class Injector {
     private static List<Class> classes = new ArrayList<>();
     private static final String PROJECT_NAME_PACKAGE = "mate.academy.internetshop";
+    private static final Logger logger = Logger.getLogger(Injector.class);
 
     static {
         try {
             classes.addAll(getClasses(PROJECT_NAME_PACKAGE));
         } catch (ClassNotFoundException | IOException e) {
-            e.printStackTrace();
+            logger.error("Sorry, something wrong!", e);
         }
     }
 
