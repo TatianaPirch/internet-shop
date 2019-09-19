@@ -27,11 +27,3 @@ public class AddBucketItemController extends HttpServlet {
         resp.sendRedirect(req.getContextPath() + "/servlet/getAllItems");
     }
 }
-
-
-
-
-
-
-
-
