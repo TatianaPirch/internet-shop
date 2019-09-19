@@ -25,4 +25,3 @@ public class GetAllBucketItemsController extends HttpServlet {
         req.getRequestDispatcher("/WEB-INF/views/allBucketItems.jsp").forward(req, resp);
     }
 }
-
