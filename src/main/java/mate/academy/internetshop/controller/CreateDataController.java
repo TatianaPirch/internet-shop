@@ -7,7 +7,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import mate.academy.internetshop.annotation.Inject;
-import mate.academy.internetshop.model.Bucket;
 import mate.academy.internetshop.model.Item;
 import mate.academy.internetshop.model.User;
 import mate.academy.internetshop.service.BucketService;
@@ -34,10 +33,7 @@ public class CreateDataController extends HttpServlet {
         Item folder = itemService.create(new Item("Folder", 100.));
 
         User tania = userService.create(new User("Tania",
-                "Pirch", "Student1"));
-
-        Bucket taniaBucket = new Bucket(tania.getId());
-        bucketService.create(taniaBucket);
+                "Pirch", "Student1", "1"));
 
         req.getRequestDispatcher("/WEB-INF/views/createData.jsp").forward(req, resp);
     }

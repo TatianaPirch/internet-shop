@@ -1,13 +1,14 @@
 <%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "c" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <jsp:useBean id="items" scope="request" type="java.util.List<mate.academy.internetshop.model.Item>"/>
+<jsp:useBean id="user" scope="request" type="mate.academy.internetshop.model.User"/>
 
 <html>
 <head>
     <title>Bucket</title>
 </head>
 <body>
-<p>Bucket</p>
+<p>Bucket of ${user.login} with ID ${user.id} </p>
 <hr>
 <a href="/internet_shop_war_exploded/servlet/completeOrder">COMPLETE ORDER</a>
 <hr>

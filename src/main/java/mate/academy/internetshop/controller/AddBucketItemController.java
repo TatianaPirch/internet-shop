@@ -7,11 +7,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import mate.academy.internetshop.annotation.Inject;
+import mate.academy.internetshop.model.Bucket;
+import mate.academy.internetshop.model.User;
 import mate.academy.internetshop.service.BucketService;
 import mate.academy.internetshop.service.UserService;
 
 public class AddBucketItemController extends HttpServlet {
-    private static final Long USER_ID = 0L;
 
     @Inject
     static BucketService bucketService;
@@ -22,8 +23,11 @@ public class AddBucketItemController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
+        Long userId = (Long) req.getSession(true).getAttribute("userId");
         String itemId = req.getParameter("item_id");
-        bucketService.addItem(bucketService.getBucket(USER_ID).getId(), Long.valueOf(itemId));
+        User user = userService.get(userId);
+        Bucket bucket = bucketService.getBucket(userId);
+        bucketService.addItem(bucket.getId(), Long.valueOf(itemId));
         resp.sendRedirect(req.getContextPath() + "/servlet/getAllItems");
     }
 }
