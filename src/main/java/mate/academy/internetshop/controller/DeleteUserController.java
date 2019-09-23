@@ -10,6 +10,7 @@ import mate.academy.internetshop.annotation.Inject;
 import mate.academy.internetshop.service.UserService;
 
 public class DeleteUserController extends HttpServlet {
+
     @Inject
     private static UserService userService;
 

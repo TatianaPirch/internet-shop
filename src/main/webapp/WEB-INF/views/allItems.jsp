@@ -7,7 +7,7 @@
 <body>
 <p>Items</p>
 <hr>
-<a href="/internet_shop_war_exploded/servlet/getAllBucketItems?user_id=${user_id}&item_id=${item.id}&bucket_id=${bucket_id}">GO TO BUCKET</a>
+<a href="/internet_shop_war_exploded/servlet/getAllBucketItems">GO TO BUCKET</a>
 <table border="1" bgcolor="#afeeee">
     <tr>
         <th>ID</th>

@@ -11,17 +11,27 @@ public class User {
     private String surname;
     private String login;
     private String password;
+    private String token;
 
     public User() {
         id = idGenerator++;
         orders = new ArrayList<>();
     }
 
-    public User(String name, String surname, String login) {
+    public User(String name, String surname, String login, String password) {
         this();
         this.name = name;
         this.surname = surname;
         this.login = login;
+        this.password = password;
+    }
+
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
     }
 
     @Override

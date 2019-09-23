@@ -35,12 +35,9 @@ Hello, ${greeting}! Welcome to the all users page!
             <td>
                 <a href="/internet_shop_war_exploded/servlet/deleteUser?user_id=${user.id}">DELETE</a>
             </td>
-            <td>
-                <a href="/internet_shop_war_exploded/servlet/getAllItems">START SHOPPING</a>
-            </td>
         </tr>
     </c:forEach>
 </table>
-<a href="/internet_shop_war_exploded/servlet/registration?">RETURN TO REGISTRATION</a>
+<a href="/internet_shop_war_exploded/registration">RETURN TO REGISTRATION</a>
 </body>
 </html>
