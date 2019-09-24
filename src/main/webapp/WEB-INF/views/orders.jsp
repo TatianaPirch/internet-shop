@@ -30,8 +30,8 @@
         </tr>
     </c:forEach>
 </table>
-<a href="/internet_shop_war_exploded/servlet/getAllBucketItems">GO TO BUCKET</a>
-<hr>
 <a href="/internet_shop_war_exploded/servlet/getAllItems">GO TO ITEM LIST</a>
+<hr>
+<a href="/internet_shop_war_exploded/logout">LOG OUT</a>
 </body>
 </html>
