@@ -52,7 +52,6 @@ public class AuthorizationFilter implements Filter {
             processUnAuthentication(req, resp);
             return;
         }
-
         String requestUrl = req.getRequestURI().replace(req.getContextPath(), EMPTY_STRING);
         Role.RoleName roleName = protectedUrls.get(requestUrl);
         if (roleName == null) {

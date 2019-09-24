@@ -26,7 +26,7 @@ public class LogoutController extends HttpServlet {
             }
         }
         Long userId = (Long) req.getSession(false).getAttribute("userId");
-        req.getSession(false).removeAttribute("userId");
+        req.getSession().invalidate();
         Bucket bucket = bucketService.getBucket(userId);
         bucketService.delete(bucket.getId());
         resp.sendRedirect(req.getContextPath() + "/login");
