@@ -5,10 +5,8 @@ import java.util.NoSuchElementException;
 
 import mate.academy.internetshop.dao.ItemDao;
 import mate.academy.internetshop.db.Storage;
-import mate.academy.internetshop.lib.Dao;
 import mate.academy.internetshop.model.Item;
 
-@Dao
 public class ItemDaoImpl implements ItemDao {
     @Override
     public Item add(Item item) {
@@ -36,12 +34,6 @@ public class ItemDaoImpl implements ItemDao {
     public void delete(Long id) {
         Storage.items
                 .removeIf(i -> i.getId().equals(id));
-    }
-
-    @Override
-    public void delete(Item item) {
-        Storage.items
-                .removeIf(e -> e.equals(item));
     }
 
     @Override
