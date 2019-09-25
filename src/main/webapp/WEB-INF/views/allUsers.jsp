@@ -39,5 +39,7 @@ Hello, ${greeting}! Welcome to the all users page!
     </c:forEach>
 </table>
 <a href="/internet_shop_war_exploded/registration">RETURN TO REGISTRATION</a>
+<hr>
+<a href="/internet_shop_war_exploded/logout">LOG OUT</a>
 </body>
 </html>

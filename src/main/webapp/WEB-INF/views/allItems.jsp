@@ -31,5 +31,6 @@
         </tr>
     </c:forEach>
 </table>
+<a href="/internet_shop_war_exploded/logout">LOG OUT</a>
 </body>
 </html>
