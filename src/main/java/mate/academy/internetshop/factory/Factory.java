@@ -24,7 +24,7 @@ import org.apache.log4j.Logger;
 
 public class Factory {
     private static Connection connection;
-    private  static Logger logger = Logger.getLogger(Factory.class);
+    private static Logger logger = Logger.getLogger(Factory.class);
 
     static  {
         try {
