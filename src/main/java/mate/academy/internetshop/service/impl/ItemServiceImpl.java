@@ -10,6 +10,7 @@ import mate.academy.internetshop.service.ItemService;
 
 @Service
 public class ItemServiceImpl implements ItemService {
+
     @Inject
     private static ItemDao itemDao;
 
@@ -31,11 +32,6 @@ public class ItemServiceImpl implements ItemService {
     @Override
     public void delete(Long id) {
         itemDao.delete(id);
-    }
-
-    @Override
-    public void delete(Item item) {
-        itemDao.delete(item);
     }
 
     @Override
