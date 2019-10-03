@@ -21,7 +21,7 @@ public class OrderDaoJdbcImpl extends AbstractDao<Order> implements OrderDao {
         super(connection);
     }
 
-    public List<Item> addItemsInDb(Order order) {
+    private List<Item> addItemsInDb(Order order) {
         List<Item> items = order.getItems();
         for (Item item : items) {
             String query = "INSERT INTO orders_items (order_id, item_id) VALUES (?, ?);";
@@ -36,7 +36,7 @@ public class OrderDaoJdbcImpl extends AbstractDao<Order> implements OrderDao {
         return items;
     }
 
-    public List<Item> getItemsFromDb(Long orderId) {
+    private List<Item> getItemsFromDb(Long orderId) {
         List<Item> items = new ArrayList<>();
         String query = "SELECT * FROM items INNER JOIN orders_items"
                 + " USING (item_id) WHERE order_id = ?;";
@@ -57,13 +57,13 @@ public class OrderDaoJdbcImpl extends AbstractDao<Order> implements OrderDao {
         return items;
     }
 
-    public void deleteItemFromDB(Long orderId) {
-        String query = "DELETE FROM orders_items WHERE order_id = ? ";
+    private void deleteItemFromDB(Long orderId) {
+        String query = "DELETE FROM orders_items WHERE order_id = ?; ";
         try (PreparedStatement statement = connection.prepareStatement(query)) {
             statement.setLong(1, orderId);
             statement.executeUpdate();
         } catch (SQLException e) {
-            logger.error("Can't delete order with id = " + orderId, e);
+            logger.error("Can't delete items for order with id = " + orderId, e);
         }
     }
 

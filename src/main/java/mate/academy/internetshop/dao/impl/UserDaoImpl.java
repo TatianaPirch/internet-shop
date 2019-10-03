@@ -28,7 +28,6 @@ public class UserDaoImpl implements UserDao {
     @Override
     public User update(User user) {
         User updatedUser = get(user.getId());
-        //updatedUser.setOrders(user.getOrders());
         return updatedUser;
     }
 
