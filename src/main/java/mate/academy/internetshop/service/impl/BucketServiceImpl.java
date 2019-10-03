@@ -7,7 +7,6 @@ import mate.academy.internetshop.dao.BucketDao;
 import mate.academy.internetshop.dao.ItemDao;
 import mate.academy.internetshop.lib.Service;
 import mate.academy.internetshop.model.Bucket;
-import mate.academy.internetshop.model.Item;
 import mate.academy.internetshop.service.BucketService;
 
 @Service
@@ -33,41 +32,27 @@ public class BucketServiceImpl implements BucketService {
     }
 
     @Override
-    public Bucket update(Bucket bucket) {
-        return bucketDao.update(bucket);
-    }
-
-    @Override
     public void delete(Long id) {
         bucketDao.delete(id);
     }
 
     @Override
     public Bucket addItem(Long bucketId, Long itemId) {
-        Bucket bucket = bucketDao.get(bucketId);
-        Item item = itemDao.get(itemId);
-        bucket.getItems().add(item);
-        return bucketDao.update(bucket);
+        return bucketDao.addItem(bucketId, itemId);
     }
 
     @Override
     public Bucket deleteItem(Long bucketId, Long itemId) {
-        Bucket bucket = bucketDao.get(bucketId);
-        Item item = itemDao.get(itemId);
-        bucket.getItems().remove(item);
-        return bucketDao.update(bucket);
+        return bucketDao.deleteItem(bucketId, itemId);
     }
 
     @Override
     public Bucket clear(Long bucketId) {
-        Bucket bucket = bucketDao.get(bucketId);
-        bucket.clear();
-        return bucket;
+        return bucketDao.clear(bucketId);
     }
 
     @Override
     public List getAllItems(Long bucketId) {
-        Bucket bucket = bucketDao.get(bucketId);
-        return bucket.getItems();
+        return bucketDao.getAllItems(bucketId);
     }
 }

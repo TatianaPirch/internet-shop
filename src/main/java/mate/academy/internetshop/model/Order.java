@@ -3,14 +3,20 @@ package mate.academy.internetshop.model;
 import java.util.List;
 
 public class Order {
-    private static long idGenerator = 0;
     private Long id;
     private List<Item> items;
     private Long userId;
 
     public Order(List<Item> items, Long userId) {
-        id = idGenerator++;
         this.items = items;
+        this.userId = userId;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public void setUserId(Long userId) {
         this.userId = userId;
     }
 

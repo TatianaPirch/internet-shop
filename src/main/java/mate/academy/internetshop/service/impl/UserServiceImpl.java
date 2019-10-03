@@ -41,11 +41,6 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List getOrders(Long id) {
-        return userDao.get(id).getOrders();
-    }
-
-    @Override
     public List<User> getAll() {
         return userDao.getAll();
     }
@@ -57,7 +52,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public Optional<User> getByToken(String token) {
+    public Optional<User>  getByToken(String token) {
         return userDao.getByToken(token);
     }
 

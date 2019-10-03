@@ -1,15 +1,11 @@
 package mate.academy.internetshop.model;
 
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 public class User {
     private String name;
-    private static long idGenerator = 0;
     private Long id;
-    private List<Order> orders;
     private String surname;
     private String login;
     private String password;
@@ -25,16 +21,17 @@ public class User {
     }
 
     public void addRole(Role role) {
-        roles.add(role);
+        this.roles.add(role);
     }
 
     public User() {
-        id = idGenerator++;
-        orders = new ArrayList<>();
+    }
+
+    public User(Long id) {
+        this.id = id;
     }
 
     public User(String name, String surname, String login, String password) {
-        this();
         this.name = name;
         this.surname = surname;
         this.login = login;
@@ -95,13 +92,5 @@ public class User {
 
     public Long getId() {
         return id;
-    }
-
-    public List<Order> getOrders() {
-        return orders;
-    }
-
-    public void setOrders(List<Order> orders) {
-        this.orders = orders;
     }
 }

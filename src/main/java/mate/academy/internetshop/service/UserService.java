@@ -16,8 +16,6 @@ public interface UserService {
 
     void delete(Long id);
 
-    List getOrders(Long id);
-
     List<User> getAll();
 
     User login(String login,String password) throws AuthenticationException;

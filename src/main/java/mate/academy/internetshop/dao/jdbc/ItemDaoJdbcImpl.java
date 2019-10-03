@@ -29,6 +29,7 @@ public class ItemDaoJdbcImpl extends AbstractDao<Item> implements ItemDao {
         try {
             statement = connection.createStatement();
             statement.executeUpdate(query);
+            return item;
         } catch (SQLException e) {
             logger.error("Can't add item " + item.getName(), e);
         } finally {
@@ -82,6 +83,7 @@ public class ItemDaoJdbcImpl extends AbstractDao<Item> implements ItemDao {
         try {
             statement = connection.createStatement();
             statement.executeUpdate(query);
+            return item;
         } catch (SQLException e) {
             logger.error("Can't update item by id " + item.getId(), e);
         } finally {
