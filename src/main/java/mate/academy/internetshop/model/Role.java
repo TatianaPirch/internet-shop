@@ -3,14 +3,8 @@ package mate.academy.internetshop.model;
 public class Role {
     private RoleName roleName;
     private Long id;
-    private static long idGenerator = 0;
-
-    public Role() {
-        id = idGenerator++;
-    }
 
     public Role(RoleName roleName) {
-        this();
         this.roleName = roleName;
     }
 

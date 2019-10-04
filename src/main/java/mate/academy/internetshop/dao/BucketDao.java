@@ -1,6 +1,9 @@
 package mate.academy.internetshop.dao;
 
+import java.util.List;
+
 import mate.academy.internetshop.model.Bucket;
+import mate.academy.internetshop.model.Item;
 
 public interface BucketDao {
     Bucket add(Bucket bucket);
@@ -9,7 +12,15 @@ public interface BucketDao {
 
     Bucket getBucket(Long userId);
 
+    List<Item> getAllItems(Long bucketId);
+
+    Bucket addItem(Long bucketId, Long itemId);
+
     Bucket update(Bucket bucket);
 
+    Bucket clear(Long id);
+
     void delete(Long id);
+
+    Bucket deleteItem(Long bucketId, Long itemId);
 }
