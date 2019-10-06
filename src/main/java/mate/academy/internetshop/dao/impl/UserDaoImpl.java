@@ -6,7 +6,6 @@ import java.util.Optional;
 
 import mate.academy.internetshop.dao.UserDao;
 import mate.academy.internetshop.db.Storage;
-import mate.academy.internetshop.exception.AuthenticationException;
 import mate.academy.internetshop.model.User;
 
 public class UserDaoImpl implements UserDao {
@@ -43,25 +42,14 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public User getByLogin(String login) throws AuthenticationException {
+    public User getByLogin(String login) {
         Optional<User> user = Storage.users.stream()
                 .filter(u -> u.getLogin().equals(login))
                 .findFirst();
-        if (user.isEmpty()) {
-            throw new AuthenticationException("incorrect login");
+        if (!user.isEmpty()) {
+            return user.get();
         }
-        return user.get();
-    }
-
-    @Override
-    public boolean uniqueLogin(String login) {
-        Optional<User> user = Storage.users.stream()
-                .filter(u -> u.getLogin().equals(login))
-                .findFirst();
-        if (user.isEmpty()) {
-            return true;
-        }
-        return false;
+        return null;
     }
 
     @Override

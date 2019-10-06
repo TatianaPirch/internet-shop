@@ -23,7 +23,7 @@ public class RegistrationController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
-        if (userService.uniqueLogin(req.getParameter("login"))) {
+        if (userService.getByLogin(req.getParameter("login")) == null) {
             User newUser = new User();
             newUser.setLogin(req.getParameter("login"));
             newUser.setName(req.getParameter("user_name"));
@@ -37,3 +37,4 @@ public class RegistrationController extends HttpServlet {
         }
     }
 }
+

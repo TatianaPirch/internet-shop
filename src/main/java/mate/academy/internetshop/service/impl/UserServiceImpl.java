@@ -70,8 +70,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public boolean uniqueLogin(String login) {
-        return userDao.uniqueLogin(login);
+    public User getByLogin(String login) {
+        return userDao.getByLogin(login);
     }
 
     @Override
