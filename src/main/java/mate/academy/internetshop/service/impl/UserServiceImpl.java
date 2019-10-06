@@ -6,6 +6,8 @@ import java.util.UUID;
 
 import mate.academy.internetshop.annotation.Inject;
 import mate.academy.internetshop.dao.BucketDao;
+import mate.academy.internetshop.dao.OrderDao;
+import mate.academy.internetshop.dao.RoleDao;
 import mate.academy.internetshop.dao.UserDao;
 import mate.academy.internetshop.exception.AuthenticationException;
 import mate.academy.internetshop.lib.Service;
@@ -18,11 +20,17 @@ public class UserServiceImpl implements UserService {
     private static UserDao userDao;
     @Inject
     private static BucketDao bucketDao;
+    @Inject
+    private static OrderDao orderDao;
+    @Inject
+    private static RoleDao roleDao;
 
     @Override
     public User create(User user) {
         user.setToken(getToken());
-        return userDao.add(user);
+        User newUser = userDao.add(user);
+        roleDao.addRoleToDB(newUser);
+        return newUser;
     }
 
     @Override
@@ -37,6 +45,10 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void delete(Long id) {
+        bucketDao.delete(bucketDao.getBucket(id).getId());
+        roleDao.deleteRoleToDB(id);
+        orderDao.getAllOrdersForUser(id)
+                .forEach(o -> orderDao.delete(o.getId()));
         userDao.delete(id);
     }
 

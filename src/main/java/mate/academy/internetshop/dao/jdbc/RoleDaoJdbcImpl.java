@@ -2,9 +2,7 @@ package mate.academy.internetshop.dao.jdbc;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.HashSet;
 import java.util.Set;
 
 import mate.academy.internetshop.dao.RoleDao;
@@ -46,25 +44,5 @@ public class RoleDaoJdbcImpl  extends AbstractDao<Role> implements RoleDao {
         } catch (SQLException e) {
             logger.error("Can't delete role for user with id" + userId, e);
         }
-    }
-
-    public Set<Role> getRolesDb(User user) {
-        Set<Role> roles = new HashSet<>();
-        String query = "SELECT * FROM roles INNER JOIN users_roles"
-                + " USING (role_id) WHERE user_id = ?;";
-        try (PreparedStatement statement = connection.prepareStatement(query)) {
-            statement.setLong(1, user.getId());
-            ResultSet resultSet = statement.executeQuery();
-            while (resultSet.next()) {
-                Long roleId = resultSet.getLong("role_id");
-                String roleDb = resultSet.getString("role_name");
-                Role role = Role.of(roleDb);
-                roles.add(role);
-                return roles;
-            }
-        } catch (SQLException e) {
-            logger.error("Can’t get role for user with login = " + user.getLogin(), e);
-        }
-        return roles;
     }
 }
