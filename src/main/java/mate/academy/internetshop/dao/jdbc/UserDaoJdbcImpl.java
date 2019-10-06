@@ -153,22 +153,34 @@ public class UserDaoJdbcImpl extends AbstractDao<User> implements UserDao {
     }
 
     @Override
-    public User login(String login, String password) throws AuthenticationException {
+    public User getByLogin(String login) throws AuthenticationException {
         String query = "SELECT * FROM users WHERE login = ?;";
         try (PreparedStatement statement = connection.prepareStatement(query)) {
             statement.setString(1, login);
             ResultSet resultSet = statement.executeQuery();
-            while (resultSet.next()) {
-                byte [] salt = resultSet.getBytes("salt");
-                if (HashUtil.hashPassword(password, salt)
-                        .equals(resultSet.getString("password"))) {
-                    return userBuild(resultSet);
-                }
+            if (!resultSet.next()) {
+                throw new AuthenticationException("Can’t get user with login = " + login);
+            }
+            return userBuild(resultSet);
+        } catch (SQLException e) {
+            logger.warn("Can’t get user with login = " + login);
+        }
+        return null;
+    }
+
+    @Override
+    public boolean uniqueLogin(String login) {
+        String query = "SELECT * FROM users WHERE login = ?;";
+        try (PreparedStatement statement = connection.prepareStatement(query)) {
+            statement.setString(1, login);
+            ResultSet resultSet = statement.executeQuery();
+            if (!resultSet.next()) {
+                return true;
             }
         } catch (SQLException e) {
             logger.warn("Can’t get user with login = " + login);
         }
-        throw new AuthenticationException("Can’t get user with login = " + login);
+        return false;
     }
 
     @Override

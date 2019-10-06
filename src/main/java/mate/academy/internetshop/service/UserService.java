@@ -20,5 +20,7 @@ public interface UserService {
 
     User login(String login,String password) throws AuthenticationException;
 
+    boolean uniqueLogin(String login);
+
     Optional<User> getByToken(String token);
 }

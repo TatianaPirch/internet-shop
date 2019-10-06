@@ -23,12 +23,17 @@ public class RegistrationController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
-        User newUser = new User();
-        newUser.setLogin(req.getParameter("login"));
-        newUser.setName(req.getParameter("user_name"));
-        newUser.setSurname(req.getParameter("user_surname"));
-        newUser.setPassword(req.getParameter("psw"));
-        User user = userService.create(newUser);
-        resp.sendRedirect(req.getContextPath() + "/login");
+        if (userService.uniqueLogin(req.getParameter("login"))) {
+            User newUser = new User();
+            newUser.setLogin(req.getParameter("login"));
+            newUser.setName(req.getParameter("user_name"));
+            newUser.setSurname(req.getParameter("user_surname"));
+            newUser.setPassword(req.getParameter("psw"));
+            User user = userService.create(newUser);
+            resp.sendRedirect(req.getContextPath() + "/login");
+        } else {
+            req.setAttribute("errorMsg", "Login already exists. Please enter another login!");
+            req.getRequestDispatcher("WEB-INF/views/registration.jsp").forward(req,resp);
+        }
     }
 }

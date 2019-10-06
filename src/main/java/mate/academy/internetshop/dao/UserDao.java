@@ -18,7 +18,9 @@ public interface UserDao {
 
     List<User> getAll();
 
-    User login(String login, String password) throws AuthenticationException;
+    User getByLogin(String login) throws AuthenticationException;
+
+    boolean uniqueLogin(String login);
 
     Optional<User> getByToken(String token);
 }
