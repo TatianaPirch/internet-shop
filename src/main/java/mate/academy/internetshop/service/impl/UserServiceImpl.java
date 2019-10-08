@@ -13,6 +13,7 @@ import mate.academy.internetshop.exception.AuthenticationException;
 import mate.academy.internetshop.lib.Service;
 import mate.academy.internetshop.model.User;
 import mate.academy.internetshop.service.UserService;
+import mate.academy.internetshop.util.HashUtil;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -60,7 +61,17 @@ public class UserServiceImpl implements UserService {
     @Override
     public User login(String login, String password)
             throws AuthenticationException {
-        return userDao.login(login, password);
+        byte[] salt = userDao.getByLogin(login).getSalt();
+        if (!HashUtil.hashPassword(password, salt)
+                .equals(userDao.getByLogin(login).getPassword())) {
+            throw new AuthenticationException("incorrect login or password");
+        }
+        return userDao.getByLogin(login);
+    }
+
+    @Override
+    public User getByLogin(String login) {
+        return userDao.getByLogin(login);
     }
 
     @Override

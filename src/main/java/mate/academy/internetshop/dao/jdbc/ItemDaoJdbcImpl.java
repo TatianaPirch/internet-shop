@@ -8,12 +8,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import mate.academy.internetshop.dao.ItemDao;
-import mate.academy.internetshop.lib.Dao;
 import mate.academy.internetshop.model.Item;
 import org.apache.log4j.Logger;
 
-@Dao
 public class ItemDaoJdbcImpl extends AbstractDao<Item> implements ItemDao {
+
     private static final String DB_NAME = "internet_shop";
     private static Logger logger = Logger.getLogger(ItemDaoJdbcImpl.class);
 

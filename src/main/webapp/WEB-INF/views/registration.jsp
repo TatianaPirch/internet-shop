@@ -6,7 +6,7 @@
 </head>
 <body>
 Let's create a new User!
-
+<div><font color="#8b0000">${errorMsg}</font></div>
 <form action="/internet_shop_war_exploded/registration" method="post">
     <div class="container">
         <h1>Register</h1>

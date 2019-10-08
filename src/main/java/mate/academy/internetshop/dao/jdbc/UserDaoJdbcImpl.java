@@ -12,7 +12,6 @@ import java.util.Optional;
 import java.util.Set;
 
 import mate.academy.internetshop.dao.UserDao;
-import mate.academy.internetshop.exception.AuthenticationException;
 import mate.academy.internetshop.lib.Dao;
 import mate.academy.internetshop.model.Role;
 import mate.academy.internetshop.model.User;
@@ -153,22 +152,18 @@ public class UserDaoJdbcImpl extends AbstractDao<User> implements UserDao {
     }
 
     @Override
-    public User login(String login, String password) throws AuthenticationException {
+    public User getByLogin(String login) {
         String query = "SELECT * FROM users WHERE login = ?;";
         try (PreparedStatement statement = connection.prepareStatement(query)) {
             statement.setString(1, login);
             ResultSet resultSet = statement.executeQuery();
-            while (resultSet.next()) {
-                byte [] salt = resultSet.getBytes("salt");
-                if (HashUtil.hashPassword(password, salt)
-                        .equals(resultSet.getString("password"))) {
-                    return userBuild(resultSet);
-                }
+            if (resultSet.next()) {
+                return userBuild(resultSet);
             }
         } catch (SQLException e) {
             logger.warn("Can’t get user with login = " + login);
         }
-        throw new AuthenticationException("Can’t get user with login = " + login);
+        return null;
     }
 
     @Override

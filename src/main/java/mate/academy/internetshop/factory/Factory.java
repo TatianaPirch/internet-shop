@@ -9,8 +9,8 @@ import mate.academy.internetshop.dao.ItemDao;
 import mate.academy.internetshop.dao.OrderDao;
 import mate.academy.internetshop.dao.RoleDao;
 import mate.academy.internetshop.dao.UserDao;
+import mate.academy.internetshop.dao.hibernate.ItemDaoHibernateImpl;
 import mate.academy.internetshop.dao.jdbc.BucketDaoJdbcImpl;
-import mate.academy.internetshop.dao.jdbc.ItemDaoJdbcImpl;
 import mate.academy.internetshop.dao.jdbc.OrderDaoJdbcImpl;
 import mate.academy.internetshop.dao.jdbc.RoleDaoJdbcImpl;
 import mate.academy.internetshop.dao.jdbc.UserDaoJdbcImpl;
@@ -62,7 +62,7 @@ public class Factory {
 
     public static ItemDao getItemDao() {
         if (itemDaoInstance == null) {
-            itemDaoInstance = new ItemDaoJdbcImpl(connection);
+            itemDaoInstance = new ItemDaoHibernateImpl();
         }
         return itemDaoInstance;
     }
