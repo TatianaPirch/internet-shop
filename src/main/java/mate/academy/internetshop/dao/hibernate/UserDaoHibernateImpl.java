@@ -1,35 +1,37 @@
 package mate.academy.internetshop.dao.hibernate;
 
 import java.util.List;
+import java.util.Optional;
 
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-
-import mate.academy.internetshop.dao.ItemDao;
+import mate.academy.internetshop.dao.UserDao;
 import mate.academy.internetshop.lib.Dao;
-import mate.academy.internetshop.model.Item;
+import mate.academy.internetshop.model.User;
+import mate.academy.internetshop.util.HashUtil;
 import mate.academy.internetshop.util.HibernateUtil;
-
 import org.apache.log4j.Logger;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.hibernate.query.Query;
 
 @Dao
-public class ItemDaoHibernateImpl implements ItemDao {
-    private static Logger logger = Logger.getLogger(ItemDaoHibernateImpl.class);
+public class UserDaoHibernateImpl implements UserDao {
+    private static Logger logger = Logger.getLogger(UserDaoHibernateImpl.class);
 
     @Override
-    public Item add(Item item) {
-        Long itemId = null;
+    public User add(User user) {
         Transaction transaction = null;
-        Session session  = null;
+        Session session = null;
+        byte[] salt = HashUtil.getSalt();
+        String hashPassword = HashUtil.hashPassword(user.getPassword(), salt);
+        user.setSalt(salt);
+        user.setPassword(hashPassword);
+        Long userId = null;
         try {
             session = HibernateUtil.getSessionFactory().openSession();
             transaction = session.beginTransaction();
-            itemId = (Long) session.save(item);
+            userId = (Long) session.save(user);
             transaction.commit();
         } catch (Exception e) {
-            logger.error("Can't add item " + item.getName(), e);
             if (transaction != null) {
                 transaction.rollback();
             }
@@ -38,38 +40,38 @@ public class ItemDaoHibernateImpl implements ItemDao {
                 session.close();
             }
         }
-        item.setId(itemId);
-        return item;
+        user.setId(userId);
+        return user;
     }
 
     @Override
-    public Item get(Long id) {
+    public User get(Long id) {
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-            Item item = session.get(Item.class, id);
-            return item;
+            User user = session.get(User.class, id);
+            return user;
         }
     }
 
     @Override
-    public Item update(Item item) {
+    public User update(User user) {
         Transaction transaction = null;
         Session session = null;
         try {
             session = HibernateUtil.getSessionFactory().openSession();
             transaction = session.beginTransaction();
-            session.update(item);
+            session.update(user);
             transaction.commit();
         } catch (Exception e) {
+            logger.error("Can't update user by id = " + user.getId(), e);
             if (transaction != null) {
                 transaction.rollback();
             }
-            logger.error("Can't update item " + item.getName(), e);
         } finally {
             if (session != null) {
                 session.close();
             }
         }
-        return item;
+        return user;
     }
 
     @Override
@@ -82,10 +84,10 @@ public class ItemDaoHibernateImpl implements ItemDao {
             session.delete(get(id));
             transaction.commit();
         } catch (Exception e) {
+            logger.error("Can't delete user with id " + id, e);
             if (transaction != null) {
                 transaction.rollback();
             }
-            logger.error("Can't delete item by id" + id, e);
         } finally {
             if (session != null) {
                 session.close();
@@ -94,12 +96,29 @@ public class ItemDaoHibernateImpl implements ItemDao {
     }
 
     @Override
-    public List<Item> getAllItems() {
+    public List<User> getAll() {
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-            CriteriaBuilder builder = session.getCriteriaBuilder();
-            CriteriaQuery<Item> criteria = builder.createQuery(Item.class);
-            criteria.from(Item.class);
-            return session.createQuery(criteria).getResultList();
+            Query query = session.createQuery("FROM User ");
+            return  query.list();
+        }
+    }
+
+    @Override
+    public User getByLogin(String login) {
+        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+            Query query = session.createQuery("FROM User WHERE login =: login");
+            query.setParameter("login", login);
+            return (User) query.uniqueResult();
+        }
+    }
+
+    @Override
+    public Optional<User> getByToken(String token) {
+        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+            Query query = session.createQuery("FROM User WHERE token =: token");
+            query.setParameter("token", token);
+            List<User> users = query.list();
+            return users.stream().findFirst();
         }
     }
 }

@@ -10,4 +10,6 @@ public interface RoleDao {
     Set<Role> addRoleToDB(User user);
 
     void deleteRoleToDB(Long userId);
+
+    Role getRoleByName(Role.RoleName roleName);
 }

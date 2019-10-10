@@ -9,18 +9,20 @@ import mate.academy.internetshop.dao.ItemDao;
 import mate.academy.internetshop.dao.OrderDao;
 import mate.academy.internetshop.dao.RoleDao;
 import mate.academy.internetshop.dao.UserDao;
+import mate.academy.internetshop.dao.hibernate.BucketDaoHibernateImpl;
 import mate.academy.internetshop.dao.hibernate.ItemDaoHibernateImpl;
-import mate.academy.internetshop.dao.jdbc.BucketDaoJdbcImpl;
+import mate.academy.internetshop.dao.hibernate.RoleDaoHibernateImpl;
+import mate.academy.internetshop.dao.hibernate.UserDaoHibernateImpl;
 import mate.academy.internetshop.dao.jdbc.OrderDaoJdbcImpl;
-import mate.academy.internetshop.dao.jdbc.RoleDaoJdbcImpl;
-import mate.academy.internetshop.dao.jdbc.UserDaoJdbcImpl;
 import mate.academy.internetshop.service.BucketService;
 import mate.academy.internetshop.service.ItemService;
 import mate.academy.internetshop.service.OrderService;
+import mate.academy.internetshop.service.RoleService;
 import mate.academy.internetshop.service.UserService;
 import mate.academy.internetshop.service.impl.BucketServiceImpl;
 import mate.academy.internetshop.service.impl.ItemServiceImpl;
 import mate.academy.internetshop.service.impl.OrderServiceImpl;
+import mate.academy.internetshop.service.impl.RoleServiceImpl;
 import mate.academy.internetshop.service.impl.UserServiceImpl;
 import org.apache.log4j.Logger;
 
@@ -49,13 +51,14 @@ public class Factory {
     private static UserService userServiceInstance;
     private static OrderService orderServiceInstance;
     private static BucketService bucketServiceInstance;
+    private static RoleService roleServiceInstance;
 
     private Factory() {
     }
 
     public static RoleDao getRoleDao() {
         if (RoleDaoInstance == null) {
-            RoleDaoInstance = new RoleDaoJdbcImpl(connection);
+            RoleDaoInstance = new RoleDaoHibernateImpl();;
         }
         return RoleDaoInstance;
     }
@@ -69,7 +72,7 @@ public class Factory {
 
     public static UserDao getUserDao() {
         if (userDaoInstance == null) {
-            userDaoInstance = new UserDaoJdbcImpl(connection);
+            userDaoInstance = new UserDaoHibernateImpl();
         }
         return userDaoInstance;
     }
@@ -83,7 +86,7 @@ public class Factory {
 
     public static BucketDao getBucketDao() {
         if (bucketDaoInstance == null) {
-            bucketDaoInstance = new BucketDaoJdbcImpl(connection);
+            bucketDaoInstance = new BucketDaoHibernateImpl();
         }
         return bucketDaoInstance;
     }
@@ -114,5 +117,12 @@ public class Factory {
             bucketServiceInstance = new BucketServiceImpl();
         }
         return bucketServiceInstance;
+    }
+
+    public static RoleService getRoleService() {
+        if (roleServiceInstance == null) {
+            roleServiceInstance = new RoleServiceImpl();
+        }
+        return roleServiceInstance;
     }
 }
