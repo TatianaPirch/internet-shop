@@ -12,6 +12,7 @@ import mate.academy.internetshop.factory.Factory;
 import mate.academy.internetshop.service.BucketService;
 import mate.academy.internetshop.service.ItemService;
 import mate.academy.internetshop.service.OrderService;
+import mate.academy.internetshop.service.RoleService;
 import mate.academy.internetshop.service.UserService;
 
 public class AnnotatedClassMap {
@@ -23,6 +24,7 @@ public class AnnotatedClassMap {
         classMap.put(BucketDao.class, Factory.getBucketDao());
         classMap.put(OrderDao.class, Factory.getOrderDao());
         classMap.put(UserDao.class, Factory.getUserDao());
+        classMap.put(RoleService.class, Factory.getRoleService());
         classMap.put(ItemService.class, Factory.getItemService());
         classMap.put(BucketService.class, Factory.getBucketService());
         classMap.put(OrderService.class, Factory.getOrderService());

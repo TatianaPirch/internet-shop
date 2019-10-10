@@ -7,6 +7,7 @@ import mate.academy.internetshop.dao.BucketDao;
 import mate.academy.internetshop.dao.ItemDao;
 import mate.academy.internetshop.lib.Service;
 import mate.academy.internetshop.model.Bucket;
+import mate.academy.internetshop.model.Item;
 import mate.academy.internetshop.service.BucketService;
 
 @Service
@@ -37,8 +38,8 @@ public class BucketServiceImpl implements BucketService {
     }
 
     @Override
-    public Bucket addItem(Long bucketId, Long itemId) {
-        return bucketDao.addItem(bucketId, itemId);
+    public Bucket addItem(Long bucketId, Item item) {
+        return bucketDao.addItem(bucketId, item);
     }
 
     @Override

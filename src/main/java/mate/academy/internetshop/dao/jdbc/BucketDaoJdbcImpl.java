@@ -8,12 +8,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import mate.academy.internetshop.dao.BucketDao;
-import mate.academy.internetshop.lib.Dao;
 import mate.academy.internetshop.model.Bucket;
 import mate.academy.internetshop.model.Item;
 import org.apache.log4j.Logger;
 
-@Dao
 public class BucketDaoJdbcImpl extends AbstractDao<Bucket> implements BucketDao {
     private static Logger logger = Logger.getLogger(BucketDaoJdbcImpl.class);
 
@@ -75,12 +73,12 @@ public class BucketDaoJdbcImpl extends AbstractDao<Bucket> implements BucketDao 
     }
 
     @Override
-    public Bucket addItem(Long bucketId, Long itemId) {
+    public Bucket addItem(Long bucketId, Item item) {
         String query =
                 "INSERT INTO buckets_items (bucket_id, item_id) VALUES (?, ?);";
         try (PreparedStatement statement = connection.prepareStatement(query)) {
             statement.setLong(1, bucketId);
-            statement.setLong(2, itemId);
+            statement.setLong(2, item.getId());
             statement.executeUpdate();
         } catch (SQLException e) {
             logger.error("Can't add item to bucket", e);

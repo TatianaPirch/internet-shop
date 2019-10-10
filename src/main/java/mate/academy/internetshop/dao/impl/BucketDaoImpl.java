@@ -54,10 +54,10 @@ public class BucketDaoImpl implements BucketDao {
     }
 
     @Override
-    public Bucket addItem(Long bucketId, Long itemId) {
+    public Bucket addItem(Long bucketId, Item item) {
         Bucket bucket = get(bucketId);
-        Item item = itemDao.get(itemId);
-        bucket.getItems().add(item);
+        Item addItem = itemDao.get(item.getId());
+        bucket.getItems().add(addItem);
         return bucket;
     }
 

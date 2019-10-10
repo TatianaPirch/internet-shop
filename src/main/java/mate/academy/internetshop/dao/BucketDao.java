@@ -14,7 +14,7 @@ public interface BucketDao {
 
     List<Item> getAllItems(Long bucketId);
 
-    Bucket addItem(Long bucketId, Long itemId);
+    Bucket addItem(Long bucketId, Item item);
 
     Bucket update(Bucket bucket);
 

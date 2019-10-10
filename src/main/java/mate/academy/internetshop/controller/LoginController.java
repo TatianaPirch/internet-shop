@@ -10,7 +10,6 @@ import javax.servlet.http.HttpSession;
 
 import mate.academy.internetshop.annotation.Inject;
 import mate.academy.internetshop.exception.AuthenticationException;
-import mate.academy.internetshop.model.Bucket;
 import mate.academy.internetshop.model.User;
 import mate.academy.internetshop.service.BucketService;
 import mate.academy.internetshop.service.UserService;
@@ -38,7 +37,6 @@ public class LoginController extends HttpServlet {
             HttpSession session = req.getSession();
             session.setAttribute("userId", user.getId());
             Cookie cookie = new Cookie("Mate", user.getToken());
-            Bucket bucket = bucketService.create(new Bucket(user.getId()));
             resp.addCookie(cookie);
             resp.sendRedirect(req.getContextPath() + "/servlet/getAllItems");
         } catch (AuthenticationException e) {

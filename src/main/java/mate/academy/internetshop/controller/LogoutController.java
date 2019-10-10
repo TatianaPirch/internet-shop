@@ -6,14 +6,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import mate.academy.internetshop.annotation.Inject;
-import mate.academy.internetshop.model.Bucket;
-import mate.academy.internetshop.service.BucketService;
-
 public class LogoutController extends HttpServlet {
-
-    @Inject
-    private static BucketService bucketService;
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
@@ -27,8 +20,6 @@ public class LogoutController extends HttpServlet {
         }
         Long userId = (Long) req.getSession(false).getAttribute("userId");
         req.getSession().invalidate();
-        Bucket bucket = bucketService.getBucket(userId);
-        bucketService.delete(bucket.getId());
         resp.sendRedirect(req.getContextPath() + "/login");
     }
 }
