@@ -8,12 +8,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import mate.academy.internetshop.dao.OrderDao;
-import mate.academy.internetshop.lib.Dao;
 import mate.academy.internetshop.model.Item;
 import mate.academy.internetshop.model.Order;
 import org.apache.log4j.Logger;
 
-@Dao
 public class OrderDaoJdbcImpl extends AbstractDao<Order> implements OrderDao {
     private static Logger logger = Logger.getLogger(OrderDaoJdbcImpl.class);
 

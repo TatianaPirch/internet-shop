@@ -19,7 +19,7 @@
                 <c:out value="${orders.id}" />
             </td>
             <td>
-                <c:out value="${orders.userId}" />
+                <c:out value="${orders.user.id}" />
             </td>
             <td>
                 <c:out value="${orders.items}" />
