@@ -9,6 +9,7 @@ import mate.academy.internetshop.dao.UserDao;
 import mate.academy.internetshop.lib.Service;
 import mate.academy.internetshop.model.Item;
 import mate.academy.internetshop.model.Order;
+import mate.academy.internetshop.model.User;
 import mate.academy.internetshop.service.OrderService;
 
 @Service
@@ -41,6 +42,8 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public Order completeOrder(List<Item> items, Long userId) {
         Order order = new Order(items, userId);
+        User user = userDao.get(userId);
+        order.setUser(user);
         orderDao.add(order);
         return order;
     }
