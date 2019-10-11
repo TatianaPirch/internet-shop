@@ -13,7 +13,7 @@ import org.hibernate.query.Query;
 
 @Dao
 public class OrderDaoHibernateImpl implements OrderDao {
-    Logger logger = Logger.getLogger(OrderDaoHibernateImpl.class);
+    private static Logger logger = Logger.getLogger(OrderDaoHibernateImpl.class);
 
     @Override
     public Order add(Order order) {
