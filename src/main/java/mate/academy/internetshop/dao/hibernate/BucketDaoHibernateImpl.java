@@ -87,7 +87,7 @@ public class BucketDaoHibernateImpl implements BucketDao {
             session.update(bucket);
             transaction.commit();
         } catch (Exception e) {
-            logger.error("Can't update Bucket " + bucket, e);
+            logger.error("Can't update bucket " + bucket, e);
             if (transaction != null) {
                 transaction.rollback();
             }
