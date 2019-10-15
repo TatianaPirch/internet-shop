@@ -26,7 +26,6 @@ public class RoleDaoJdbcImpl  extends AbstractDao<Role> implements RoleDao {
                 statement.setLong(1, user.getId());
                 statement.setLong(2, 1);
                 statement.executeUpdate();
-                return roles;
             } catch (SQLException e) {
                 logger.error("Can't add role from user "
                         + "with login = " + user.getLogin(), e);

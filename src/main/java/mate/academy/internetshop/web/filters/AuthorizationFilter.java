@@ -23,7 +23,7 @@ import static mate.academy.internetshop.model.Role.RoleName.ADMIN;
 import static mate.academy.internetshop.model.Role.RoleName.USER;
 
 public class AuthorizationFilter implements Filter {
-    public static final String EMPTY_STRING = "";
+    private static final String EMPTY_STRING = "";
     private Map<String, Role.RoleName> protectedUrls = new HashMap<>();
 
     @Inject
