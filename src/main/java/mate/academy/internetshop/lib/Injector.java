@@ -1,4 +1,4 @@
-package mate.academy.internetshop.annotation;
+package mate.academy.internetshop.lib;
 
 import java.io.File;
 import java.io.IOException;
@@ -8,8 +8,6 @@ import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.List;
 
-import mate.academy.internetshop.lib.Dao;
-import mate.academy.internetshop.lib.Service;
 import org.apache.log4j.Logger;
 
 public class Injector {

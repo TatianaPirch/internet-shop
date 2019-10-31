@@ -18,7 +18,7 @@ public class RoleDaoJdbcImpl  extends AbstractDao<Role> implements RoleDao {
         super(connection);
     }
 
-    public Set<Role> addRoleToDB(User user) {
+    public Set<Role> addRole(User user) {
         Set<Role> roles = user.getRoles();
         for (Role role : roles) {
             String query = "INSERT INTO users_roles (user_id, role_id) VALUES (?, ?) ";
@@ -54,7 +54,7 @@ public class RoleDaoJdbcImpl  extends AbstractDao<Role> implements RoleDao {
         return null;
     }
 
-    public void deleteRoleToDB(Long userId) {
+    public void deleteRole(Long userId) {
         String query = "DELETE FROM users_roles WHERE user_id = ? ";
         try (PreparedStatement statement = connection.prepareStatement(query)) {
             statement.setLong(1, userId);

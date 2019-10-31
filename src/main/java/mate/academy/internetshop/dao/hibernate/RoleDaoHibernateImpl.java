@@ -17,7 +17,7 @@ public class RoleDaoHibernateImpl implements RoleDao {
     private static Logger logger = Logger.getLogger(RoleDaoHibernateImpl.class);
 
     @Override
-    public Set<Role> addRoleToDB(User user) {
+    public Set<Role> addRole(User user) {
         Session session = HibernateUtil.getSessionFactory().openSession();
         Transaction transaction = session.beginTransaction();
         Set<Role> roles = user.getRoles();
@@ -55,7 +55,7 @@ public class RoleDaoHibernateImpl implements RoleDao {
     }
 
     @Override
-    public void deleteRoleToDB(Long userId) {
+    public void deleteRole(Long userId) {
         Session session = HibernateUtil.getSessionFactory().openSession();
         Transaction transaction = session.beginTransaction();
         try {
