@@ -55,17 +55,17 @@ public class RoleDaoHibernateImpl implements RoleDao {
     }
 
     @Override
-    public void deleteRole(Long userId) {
+    public void deleteAllRolesForUser(User user) {
         Session session = HibernateUtil.getSessionFactory().openSession();
         Transaction transaction = session.beginTransaction();
         try {
             Query query = session.createSQLQuery(
                     "DELETE FROM users_roles WHERE user_id = ?");
-            query.setParameter(1, userId);
+            query.setParameter(1, user.getId());
             query.executeUpdate();
             transaction.commit();
         } catch (Exception e) {
-            logger.error("Can't delete role for user with id" + userId, e);
+            logger.error("Can't delete role for user with id" + user.getId(), e);
             if (transaction != null) {
                 transaction.rollback();
             }

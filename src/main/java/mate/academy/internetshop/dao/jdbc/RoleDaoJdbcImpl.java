@@ -54,13 +54,13 @@ public class RoleDaoJdbcImpl  extends AbstractDao<Role> implements RoleDao {
         return null;
     }
 
-    public void deleteRole(Long userId) {
+    public void deleteAllRolesForUser(User user) {
         String query = "DELETE FROM users_roles WHERE user_id = ? ";
         try (PreparedStatement statement = connection.prepareStatement(query)) {
-            statement.setLong(1, userId);
+            statement.setLong(1, user.getId());
             statement.executeUpdate();
         } catch (SQLException e) {
-            logger.error("Can't delete role for user with id" + userId, e);
+            logger.error("Can't delete role for user with id" + user.getId(), e);
         }
     }
 }
