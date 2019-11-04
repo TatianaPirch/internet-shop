@@ -1,4 +1,4 @@
-package mate.academy.internetshop.annotation;
+package mate.academy.internetshop.lib;
 
 import java.util.HashMap;
 import java.util.Map;

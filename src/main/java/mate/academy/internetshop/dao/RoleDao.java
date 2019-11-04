@@ -7,9 +7,9 @@ import mate.academy.internetshop.model.User;
 
 public interface RoleDao {
 
-    Set<Role> addRoleToDB(User user);
+    Set<Role> addRole(User user);
 
-    void deleteRoleToDB(Long userId);
+    void deleteAllRolesForUser(User user);
 
     Role getRoleByName(Role.RoleName roleName);
 }

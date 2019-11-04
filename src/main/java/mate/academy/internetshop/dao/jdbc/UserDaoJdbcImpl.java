@@ -166,9 +166,16 @@ public class UserDaoJdbcImpl extends AbstractDao<User> implements UserDao {
 
     @Override
     public Optional<User> getByToken(String token) {
-        List<User> users = getAll();
-        return users.stream()
-                .filter(u -> u.getToken().equals(token))
-                .findFirst();
+        String query = "SELECT * FROM users WHERE token = ?;";
+        try (PreparedStatement statement = connection.prepareStatement(query)) {
+            statement.setString(1, token);
+            ResultSet resultSet = statement.executeQuery();
+            if (resultSet.next()) {
+                return Optional.of(userBuild(resultSet));
+            }
+        } catch (SQLException e) {
+            logger.warn("Can’t get user with token = " + token);
+        }
+        return Optional.empty();
     }
 }
